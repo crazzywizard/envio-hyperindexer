@@ -1,0 +1,50 @@
+type EventsSummary {
+  id: ID!
+  protocolRewards_Deposit: [ProtocolRewards_Deposit!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_DepositCount: BigInt!
+  protocolRewards_EIP712DomainChanged: [ProtocolRewards_EIP712DomainChanged!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_EIP712DomainChangedCount: BigInt!
+  protocolRewards_RewardsDeposit: [ProtocolRewards_RewardsDeposit!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_RewardsDepositCount: BigInt!
+  protocolRewards_Withdraw: [ProtocolRewards_Withdraw!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_WithdrawCount: BigInt!
+}
+
+type ProtocolRewards_Deposit {
+  id: ID!
+  from: String!
+  to: String!
+  reason: String!
+  amount: BigInt!
+  comment: String!
+  eventsSummary: String!
+}
+
+type ProtocolRewards_EIP712DomainChanged {
+  id: ID!
+  eventsSummary: String!
+}
+
+type ProtocolRewards_RewardsDeposit {
+  id: ID!
+  creator: String!
+  createReferral: String!
+  mintReferral: String!
+  firstMinter: String!
+  zora: String!
+  from: String!
+  creatorReward: BigInt!
+  createReferralReward: BigInt!
+  mintReferralReward: BigInt!
+  firstMinterReward: BigInt!
+  zoraReward: BigInt!
+  eventsSummary: String!
+}
+
+type ProtocolRewards_Withdraw {
+  id: ID!
+  from: String!
+  to: String!
+  amount: BigInt!
+  eventsSummary: String!
+}

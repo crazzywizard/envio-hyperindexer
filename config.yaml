@@ -1,0 +1,34 @@
+name: envio
+contracts:
+  - name: ProtocolRewards
+    handler: src/EventHandlers.ts
+    events:
+      - event: Deposit(address indexed from, address indexed to, bytes4 indexed reason, uint256 amount, string comment)
+      - event: EIP712DomainChanged()
+      - event: RewardsDeposit(address indexed creator, address indexed createReferral, address indexed mintReferral, address firstMinter, address zora, address from, uint256 creatorReward, uint256 createReferralReward, uint256 mintReferralReward, uint256 firstMinterReward, uint256 zoraReward)
+      - event: Withdraw(address indexed from, address indexed to, uint256 amount)
+networks:
+  - id: 1
+    start_block: 0
+    contracts:
+      - name: ProtocolRewards
+        address:
+          - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+  - id: 10
+    start_block: 0
+    contracts:
+      - name: ProtocolRewards
+        address:
+          - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+  - id: 8453
+    start_block: 0
+    contracts:
+      - name: ProtocolRewards
+        address:
+          - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+  - id: 7777777
+    start_block: 0
+    contracts:
+      - name: ProtocolRewards
+        address:
+          - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
