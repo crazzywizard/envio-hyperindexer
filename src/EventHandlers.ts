@@ -108,7 +108,10 @@ ProtocolRewardsContract_RewardsDeposit_handler(({ event, context }) => {
     mintReferralReward: event.params.mintReferralReward,
     firstMinterReward: event.params.firstMinterReward,
     zoraReward: event.params.zoraReward,
-    eventsSummary: GLOBAL_EVENTS_SUMMARY_KEY
+    eventsSummary: GLOBAL_EVENTS_SUMMARY_KEY,
+    chainId: event.chainId as any as bigint,
+    timestamp: event.blockTimestamp as any as bigint,
+    transactionHash: event.transactionHash
   };
 
   context.EventsSummary.set(nextSummaryEntity);
