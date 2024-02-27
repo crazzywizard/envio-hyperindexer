@@ -7,7 +7,7 @@ import {
   ProtocolRewardsContract_EIP712DomainChanged_loader,
   ProtocolRewardsContract_EIP712DomainChanged_handler,
   ProtocolRewardsContract_RewardsDeposit_loader,
-  ProtocolRewardsContract_RewardsDeposit_handler,
+  ProtocolRewardsContract_RewardsDeposit_handlerAsync,
   ProtocolRewardsContract_Withdraw_loader,
   ProtocolRewardsContract_Withdraw_handler
 } from '../generated/src/Handlers.gen';
@@ -85,8 +85,8 @@ ProtocolRewardsContract_RewardsDeposit_loader(({ event, context }) => {
   context.EventsSummary.load(GLOBAL_EVENTS_SUMMARY_KEY);
 });
 
-ProtocolRewardsContract_RewardsDeposit_handler(async ({ event, context }) => {
-  const summary = context.EventsSummary.get(GLOBAL_EVENTS_SUMMARY_KEY);
+ProtocolRewardsContract_RewardsDeposit_handlerAsync(async ({ event, context }) => {
+  const summary = await context.EventsSummary.get(GLOBAL_EVENTS_SUMMARY_KEY);
   const currentSummaryEntity: EventsSummaryEntity = summary ?? INITIAL_EVENTS_SUMMARY;
   const buyer = await getPayerFromTransaction(event.transactionHash, event.chainId);
   const nextSummaryEntity = {
