@@ -8,6 +8,18 @@ contracts:
       - event: RewardsDeposit(address indexed creator, address indexed createReferral, address indexed mintReferral, address firstMinter, address zora, address from, uint256 creatorReward, uint256 createReferralReward, uint256 mintReferralReward, uint256 firstMinterReward, uint256 zoraReward)
         isAsync: true
       - event: Withdraw(address indexed from, address indexed to, uint256 amount)
+    abi_file_path: abis/ProtocolRewards.json
+  - name: SoundCreatorV2
+    handler: src/SoundCreatorV2EventHandlers.ts
+    abi_file_path: abis/SoundCreatorV2.json
+    events:
+      - event: SoundEditionCreated(address indexed soundEdition, address indexed deployer,bytes initData, address[] contracts,bytes[] data,bytes[] results)
+  - name: SoundEdition
+    handler: src/SoundEditionEventHandlers.ts
+    abi_file_path: abis/SoundEdition.json
+    events:
+      - event: Minted(address to, uint256 quantity, uint256 fromTokenId)
+
 networks:
   - id: 1
     start_block: 0
@@ -15,18 +27,26 @@ networks:
       - name: ProtocolRewards
         address:
           - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+      - name: SoundCreatorV2
+        address: '0x0000000000aec84F5BFc2af15EAfb943bf4e3522'
   - id: 10
     start_block: 0
     contracts:
       - name: ProtocolRewards
         address:
           - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+      - name: SoundCreatorV2
+        address:
+          - '0x0000000000aec84F5BFc2af15EAfb943bf4e3522'
   - id: 8453
     start_block: 0
     contracts:
       - name: ProtocolRewards
         address:
           - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+      - name: SoundCreatorV2
+        address:
+          - '0x0000000000aec84F5BFc2af15EAfb943bf4e3522'
   - id: 7777777
     start_block: 0
     contracts:
