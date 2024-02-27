@@ -19,6 +19,7 @@ import {
   ProtocolRewards_WithdrawEntity,
   EventsSummaryEntity
 } from '../generated/src/Types.gen';
+import { getPayerFromTransaction } from './eth_getTransactionByHash';
 
 export const GLOBAL_EVENTS_SUMMARY_KEY = 'GlobalEventsSummary';
 
@@ -84,11 +85,10 @@ ProtocolRewardsContract_RewardsDeposit_loader(({ event, context }) => {
   context.EventsSummary.load(GLOBAL_EVENTS_SUMMARY_KEY);
 });
 
-ProtocolRewardsContract_RewardsDeposit_handler(({ event, context }) => {
+ProtocolRewardsContract_RewardsDeposit_handler(async ({ event, context }) => {
   const summary = context.EventsSummary.get(GLOBAL_EVENTS_SUMMARY_KEY);
-
   const currentSummaryEntity: EventsSummaryEntity = summary ?? INITIAL_EVENTS_SUMMARY;
-
+  const buyer = await getPayerFromTransaction(event.transactionHash, event.chainId);
   const nextSummaryEntity = {
     ...currentSummaryEntity,
     protocolRewards_RewardsDepositCount:
@@ -111,7 +111,8 @@ ProtocolRewardsContract_RewardsDeposit_handler(({ event, context }) => {
     eventsSummary: GLOBAL_EVENTS_SUMMARY_KEY,
     chainId: event.chainId as any as bigint,
     timestamp: event.blockTimestamp as any as bigint,
-    transactionHash: event.transactionHash
+    transactionHash: event.transactionHash,
+    buyer: buyer
   };
 
   context.EventsSummary.set(nextSummaryEntity);

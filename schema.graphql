@@ -44,6 +44,7 @@ type ProtocolRewards_RewardsDeposit {
   chainId: BigInt!
   timestamp: BigInt!
   transactionHash: String!
+  buyer: String!
 }
 
 type ProtocolRewards_Withdraw {
