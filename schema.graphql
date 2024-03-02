@@ -10,11 +10,6 @@ type EventsSummary {
   protocolRewards_RewardsDepositCount: BigInt!
   protocolRewards_Withdraw: [ProtocolRewards_Withdraw!]! @derivedFrom(field: "eventsSummary")
   protocolRewards_WithdrawCount: BigInt!
-  soundCreatorV2_SoundEditionCreated: [SoundCreatorV2_SoundEditionCreated!]!
-    @derivedFrom(field: "eventsSummary")
-  soundCreatorV2_SoundEditionCreatedCount: BigInt!
-  soundEdition_Minted: [SoundEdition_Minted!]! @derivedFrom(field: "eventsSummary")
-  soundEdition_MintedCount: BigInt!
 }
 
 type ProtocolRewards_Deposit {
@@ -57,23 +52,5 @@ type ProtocolRewards_Withdraw {
   from: String!
   to: String!
   amount: BigInt!
-  eventsSummary: String!
-}
-
-type SoundCreatorV2_SoundEditionCreated {
-  id: ID!
-  soundEdition: String!
-  deployer: String!
-  initData: String!
-  contracts: [String!]!
-  data: [String!]!
-  results: [String!]!
-  eventsSummary: String!
-}
-type SoundEdition_Minted {
-  id: ID!
-  to: String!
-  quantity: BigInt!
-  fromTokenId: BigInt!
   eventsSummary: String!
 }

@@ -28,9 +28,7 @@ const INITIAL_EVENTS_SUMMARY: EventsSummaryEntity = {
   protocolRewards_DepositCount: BigInt(0),
   protocolRewards_EIP712DomainChangedCount: BigInt(0),
   protocolRewards_RewardsDepositCount: BigInt(0),
-  protocolRewards_WithdrawCount: BigInt(0),
-  soundCreatorV2_SoundEditionCreatedCount: BigInt(0),
-  soundEdition_MintedCount: BigInt(0)
+  protocolRewards_WithdrawCount: BigInt(0)
 };
 
 ProtocolRewardsContract_Deposit_loader(({ event, context }) => {
