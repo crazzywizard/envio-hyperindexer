@@ -3,10 +3,11 @@ export const getPayerFromTransaction = async (
   chainId: string | number
 ) => {
   const endpoints: any = {
-    1: 'https://eth.rpc.hypersync.xyz',
-    10: 'https://optimism.rpc.hypersync.xyz',
-    8453: 'https://base.rpc.hypersync.xyz',
-    7777777: 'https://zora.rpc.hypersync.xyz'
+    1: 'https://lb.drpc.org/ogrpc?network=ethereum&dkey=AlJLQo6AmUCSojrybRpuoL1eZYba2DoR7qLWGtyyLTIM',
+    10: 'https://lb.drpc.org/ogrpc?network=optimism&dkey=AlJLQo6AmUCSojrybRpuoL1eZYba2DoR7qLWGtyyLTIM',
+    8453: 'https://lb.drpc.org/ogrpc?network=base&dkey=AlJLQo6AmUCSojrybRpuoL1eZYba2DoR7qLWGtyyLTIM',
+    7777777:
+      'https://lb.drpc.org/ogrpc?network=zora&dkey=AlJLQo6AmUCSojrybRpuoL1eZYba2DoR7qLWGtyyLTIM'
   };
   try {
     const response = await fetch(endpoints[chainId], {
