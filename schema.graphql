@@ -2,9 +2,11 @@ type EventsSummary {
   id: ID!
   protocolRewards_Deposit: [ProtocolRewards_Deposit!]! @derivedFrom(field: "eventsSummary")
   protocolRewards_DepositCount: BigInt!
-  protocolRewards_EIP712DomainChanged: [ProtocolRewards_EIP712DomainChanged!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_EIP712DomainChanged: [ProtocolRewards_EIP712DomainChanged!]!
+    @derivedFrom(field: "eventsSummary")
   protocolRewards_EIP712DomainChangedCount: BigInt!
-  protocolRewards_RewardsDeposit: [ProtocolRewards_RewardsDeposit!]! @derivedFrom(field: "eventsSummary")
+  protocolRewards_RewardsDeposit: [ProtocolRewards_RewardsDeposit!]!
+    @derivedFrom(field: "eventsSummary")
   protocolRewards_RewardsDepositCount: BigInt!
   protocolRewards_Withdraw: [ProtocolRewards_Withdraw!]! @derivedFrom(field: "eventsSummary")
   protocolRewards_WithdrawCount: BigInt!
@@ -39,6 +41,10 @@ type ProtocolRewards_RewardsDeposit {
   firstMinterReward: BigInt!
   zoraReward: BigInt!
   eventsSummary: String!
+  chainId: BigInt!
+  timestamp: BigInt!
+  transactionHash: String!
+  buyer: String!
 }
 
 type ProtocolRewards_Withdraw {

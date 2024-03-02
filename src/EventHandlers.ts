@@ -7,7 +7,7 @@ import {
   ProtocolRewardsContract_EIP712DomainChanged_loader,
   ProtocolRewardsContract_EIP712DomainChanged_handler,
   ProtocolRewardsContract_RewardsDeposit_loader,
-  ProtocolRewardsContract_RewardsDeposit_handler,
+  ProtocolRewardsContract_RewardsDeposit_handlerAsync,
   ProtocolRewardsContract_Withdraw_loader,
   ProtocolRewardsContract_Withdraw_handler
 } from '../generated/src/Handlers.gen';
@@ -19,6 +19,7 @@ import {
   ProtocolRewards_WithdrawEntity,
   EventsSummaryEntity
 } from '../generated/src/Types.gen';
+import { getPayerFromTransaction } from './eth_getTransactionByHash';
 
 export const GLOBAL_EVENTS_SUMMARY_KEY = 'GlobalEventsSummary';
 
@@ -84,11 +85,10 @@ ProtocolRewardsContract_RewardsDeposit_loader(({ event, context }) => {
   context.EventsSummary.load(GLOBAL_EVENTS_SUMMARY_KEY);
 });
 
-ProtocolRewardsContract_RewardsDeposit_handler(({ event, context }) => {
-  const summary = context.EventsSummary.get(GLOBAL_EVENTS_SUMMARY_KEY);
-
+ProtocolRewardsContract_RewardsDeposit_handlerAsync(async ({ event, context }) => {
+  const summary = await context.EventsSummary.get(GLOBAL_EVENTS_SUMMARY_KEY);
   const currentSummaryEntity: EventsSummaryEntity = summary ?? INITIAL_EVENTS_SUMMARY;
-
+  const buyer = await getPayerFromTransaction(event.transactionHash, event.chainId);
   const nextSummaryEntity = {
     ...currentSummaryEntity,
     protocolRewards_RewardsDepositCount:
@@ -108,7 +108,11 @@ ProtocolRewardsContract_RewardsDeposit_handler(({ event, context }) => {
     mintReferralReward: event.params.mintReferralReward,
     firstMinterReward: event.params.firstMinterReward,
     zoraReward: event.params.zoraReward,
-    eventsSummary: GLOBAL_EVENTS_SUMMARY_KEY
+    eventsSummary: GLOBAL_EVENTS_SUMMARY_KEY,
+    chainId: event.chainId as any as bigint,
+    timestamp: event.blockTimestamp as any as bigint,
+    transactionHash: event.transactionHash,
+    buyer: buyer
   };
 
   context.EventsSummary.set(nextSummaryEntity);
