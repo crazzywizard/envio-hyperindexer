@@ -33,3 +33,9 @@ networks:
       - name: ProtocolRewards
         address:
           - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
+  - id: 42161
+    start_block: 0
+    contracts:
+      - name: ProtocolRewards
+        address:
+          - 0x7777777F279eba3d3Ad8F4E708545291A6fDBA8B
